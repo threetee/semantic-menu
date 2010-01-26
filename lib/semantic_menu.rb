@@ -21,7 +21,12 @@ class MenuItem
   end
   
   def to_s
-    content_tag :li, link_to(@title, @link, @link_opts) + child_output, ({:class => 'active'} if active?)
+    cssclass = ''
+    cssclass = @link_opts[:class] if @link_opts[:class]
+    cssclass = [ cssclass, 'active'].join(' ') if active?
+
+#    content_tag :li, link_to(@title, @link, @link_opts) + child_output, ({:class => 'active'} if active?)
+    content_tag :li, link_to(@title, @link, @link_opts) + child_output, ({:class => cssclass})
   end
   
   def level_class
